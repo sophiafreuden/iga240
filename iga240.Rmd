@@ -30,6 +30,26 @@ nkmissiles2 <- nkmissiles %>%
 ```
 
 ```{r}
+# plot of missile distant over time
 
+# tables of missile launch success rates per missile type
+
+# bar graph of missile types
+
+# GIS render of missile launches animated over time?
+```
+
+```{r}
+nkmissiles3 <- nkmissiles %>%
+  drop_na(distance_travelled)
+```
+
+```{r}
+nkmissiles4 <- nkmissiles3 %>%
+  filter(distance_travelled > 0)
+```
+
+```{r}
+ggplot(nkmissiles4, aes(x = date, y = distance_travelled)) + geom_point()
 ```
 
