@@ -14,7 +14,7 @@ library(tidyverse)
 ```
 
 ```{r}
-nkmissiles <- read_xlsx("nkcleaned2.xlsx", col_types = )
+nkmissiles <- read_xlsx("nkcleaned2.xlsx")
 
 nkmissiles <- clean_names(nkmissiles)
 
@@ -22,6 +22,10 @@ nkmissiles <- nkmissiles %>%
   mutate(id = f1) %>%
   select(-f1) %>%
   mutate(facility_latitude = as.numeric(facility_latitude)) %>%
-  mutate(facility_longitude = as.numeric(facility_longitude))
+  mutate(facility_longitude = as.numeric(facility_longitude)) %>%
+  mutate(date = ymd(date))
+
+nkmissiles2 <- nkmissiles %>%
+  mutate(date_entered_updated = ymd(date_entered_updated))
 ```
 
