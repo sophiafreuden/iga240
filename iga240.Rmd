@@ -13,7 +13,7 @@ library(lubridate)
 library(tidyverse)
 ```
 
-```{r}
+```{r, warning=FALSE}
 nkmissiles <- read_xlsx("nkcleaned2.xlsx")
 
 nkmissiles <- clean_names(nkmissiles)
@@ -27,5 +27,9 @@ nkmissiles <- nkmissiles %>%
 
 nkmissiles2 <- nkmissiles %>%
   mutate(date_entered_updated = ymd(date_entered_updated))
+```
+
+```{r}
+
 ```
 
