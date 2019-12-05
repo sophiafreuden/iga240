@@ -1,0 +1,27 @@
+---
+title: "IGA 240 - The Final Countdown"
+author: "Sophia Freuden"
+date: "12/5/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(readxl)
+library(janitor)
+library(lubridate)
+library(tidyverse)
+```
+
+```{r}
+nkmissiles <- read_xlsx("nkcleaned2.xlsx", col_types = )
+
+nkmissiles <- clean_names(nkmissiles)
+
+nkmissiles <- nkmissiles %>%
+  mutate(id = f1) %>%
+  select(-f1) %>%
+  mutate(facility_latitude = as.numeric(facility_latitude)) %>%
+  mutate(facility_longitude = as.numeric(facility_longitude))
+```
+
