@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = FALSE)
 library(readxl)
 library(janitor)
 library(lubridate)
+library(gt)
 library(tidyverse)
 ```
 
@@ -50,15 +51,20 @@ nkmissiles4 <- nkmissiles3 %>%
 ```
 
 ```{r nkmissiles distance travelled over time}
-ggplot(nkmissiles4, aes(x = date, y = distance_travelled)) + geom_point()
+ggplot(nkmissiles4, aes(x = date, y = distance_travelled)) +
+  geom_point()
 ```
 
 ```{r}
-nkmissiles5 <- nkmissiles2 %>% arrange(desc(distance_travelled)) %>% slice(1:62)
+nkmissiles5 <- nkmissiles2 %>%
+  arrange(desc(distance_travelled)) %>%
+  slice(1:62)
 ```
 
 ```{r}
-nkmissiles6 <- nkmissiles2 %>% arrange(desc(distance_travelled)) %>% slice(63:140)
+nkmissiles6 <- nkmissiles2 %>%
+  arrange(desc(distance_travelled)) %>%
+  slice(63:140)
 ```
 
 
