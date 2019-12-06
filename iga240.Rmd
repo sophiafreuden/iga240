@@ -176,13 +176,13 @@ Click <a href = "https://www.nti.org/analysis/articles/cns-north-korea-missile-t
 ```{r map south china sea, fig.height=10, fig.width=10}
 x <- load.image("scs.png")
 
-plot(x, axes = FALSE)
+plot(x, axes = FALSE, main = "Source: Australian National University")
 ```
 
 ```{r map black sea, fig.height=10, fig.width=10}
 y <- load.image("kerch.png")
 
-plot(y, axes = FALSE)
+plot(y, axes = FALSE, main = "Source: Bellingcat")
 ```
 
 
