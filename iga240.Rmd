@@ -186,15 +186,21 @@ y <- load.image("kerch.png")
 plot(y, axes = FALSE, main = "Source: Bellingcat")
 ```
 
-```{r map black sea 2, fig.height=10, fig.width=10}
+```{r map black sea 2, fig.height=10, fig.width=10, warning=FALSE}
 z <- load.image("kerch2.jpg")
 
 plot(z, axes = FALSE, main = "Source: Kyiv Post")
 ```
 
-```{r map black sea 3, fig.height=10, fig.width=10}
+```{r map black sea 3, fig.height=10, fig.width=10, warning=FALSE}
 a <- load.image("blacksea.png")
 
 plot(a, axes = FALSE, main = "Source: Public Domain")
+```
+
+```{r world, fig.height=10, fig.width=10, warning=FALSE}
+b <- load.image("world.png")
+
+plot(b, axes = FALSE, main = "Source: Maps of the World")
 ```
 
