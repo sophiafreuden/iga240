@@ -49,7 +49,16 @@ nkmissiles4 <- nkmissiles3 %>%
   filter(distance_travelled > 0)
 ```
 
-```{r}
+```{r nkmissiles distance travelled over time}
 ggplot(nkmissiles4, aes(x = date, y = distance_travelled)) + geom_point()
 ```
+
+```{r}
+nkmissiles5 <- nkmissiles2 %>% arrange(desc(distance_travelled)) %>% slice(1:62)
+```
+
+```{r}
+nkmissiles6 <- nkmissiles2 %>% arrange(desc(distance_travelled)) %>% slice(63:140)
+```
+
 
