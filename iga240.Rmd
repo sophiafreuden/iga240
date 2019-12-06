@@ -11,8 +11,13 @@ library(readxl)
 library(janitor)
 library(lubridate)
 library(gt)
+library(scales)
 library(tidyverse)
 ```
+
+### North Korean Missiles Tests, 1984 to Current Date
+
+#### Data from the Center for Nonproliferation Studies (CNS)
 
 ```{r, warning=FALSE}
 nkmissiles <- read_xlsx("nkcleaned2.xlsx")
@@ -31,16 +36,6 @@ nkmissiles2 <- nkmissiles %>%
 ```
 
 ```{r}
-# plot of missile distant over time
-
-# tables of missile launch success rates per missile type
-
-# bar graph of missile types
-
-# GIS render of missile launches animated over time?
-```
-
-```{r}
 nkmissiles3 <- nkmissiles %>%
   drop_na(distance_travelled)
 ```
@@ -50,10 +45,63 @@ nkmissiles4 <- nkmissiles3 %>%
   filter(distance_travelled > 0)
 ```
 
-```{r nkmissiles distance travelled over time}
-ggplot(nkmissiles4, aes(x = date, y = distance_travelled)) +
-  geom_point()
+```{r nkmissiles distance travelled over time, fig.align="center"}
+plot1 <- ggplot(nkmissiles4, aes(x = date, y = distance_travelled, color = missile_type)) +
+  geom_point() +
+  labs(
+    title = "Distance Missiles Travelled Over Time",
+    subtitle = "Each point represents a single missile launch",
+    color = "Missile Type"
+  ) +
+  xlab("Time") +
+  ylab("Distance Travelled")
 ```
+
+```{r, fig.align="center"}
+nkmissiles8 <- nkmissiles2 %>%
+  mutate(year = year(date)) %>%
+  group_by(year) %>%
+  count()
+
+plot4 <- ggplot(nkmissiles8, aes(x = year, y = n)) +
+  geom_point() +
+  labs(title = "Total Missile Tests Per Year") +
+  xlab("Year") +
+  ylab("Count")
+
+plot4
+```
+
+```{r}
+nkmissiles2$missile_type <- factor(nkmissiles2$missile_type,
+  levels = c(
+    "SRBM",
+    "MRBM",
+    "IRBM",
+    "SLBM",
+    "SLV",
+    "ICBM",
+    "Unknown"
+  )
+)
+```
+
+
+```{r, fig.align="center"}
+plot5 <- ggplot(nkmissiles2, aes(x = missile_type, fill = missile_type)) +
+  geom_bar() +
+  labs(title = "Missile Type Count") +
+  xlab("Missile Type") +
+  ylab("Count")
+
+plot5
+```
+
+
+```{r, fig.align="center"}
+plot1
+```
+
 
 ```{r}
 nkmissiles5 <- nkmissiles2 %>%
@@ -67,4 +115,59 @@ nkmissiles6 <- nkmissiles2 %>%
   slice(63:140)
 ```
 
+```{r}
+nkmissiles7 <- nkmissiles6 %>%
+  mutate(year = year(date))
 
+table1 <- nkmissiles7 %>%
+  group_by(year) %>%
+  count()
+
+table2 <- nkmissiles7 %>%
+  filter(test_outcome == "Success") %>%
+  group_by(year) %>%
+  count() %>%
+  mutate(success = n) %>%
+  select(-n)
+
+table3 <- inner_join(table1, table2, by = "year") %>%
+  mutate(total_tests = n) %>%
+  select(-n) %>%
+  mutate(prop_success = success / total_tests)
+
+table4 <- table3 %>%
+  mutate(prop_success = percent(prop_success))
+
+table5 <- table4 %>%
+  ungroup() %>%
+  gt() %>%
+  tab_header("Test Success Rates for Missiles with Unknown Distances Travelled") %>%
+  cols_label(year = "Year", success = "Success Count", total_tests = "Total Count", prop_success = "Percent Successful")
+```
+
+```{r}
+plot2 <- ggplot(table1, aes(x = year, y = n)) +
+  geom_point() +
+  labs(title = "Total Number of Tests Per Year", subtitle = "Tests with unknown distances travelled only") +
+  xlab("Year") +
+  ylab("Count")
+```
+
+```{r}
+plot3 <- ggplot(table3, aes(x = year, y = prop_success)) +
+  geom_point() +
+  labs(title = "Proportion of Successful Tests Per Year", subtitle = "Tests with unknown distances travelled only") +
+  xlab("Year") +
+  ylab("Success Rate")
+```
+
+```{r, fig.align="center"}
+table5
+```
+<br>
+```{r, fig.align="center"}
+plot2
+plot3
+```
+
+Click <a href = "https://www.nti.org/analysis/articles/cns-north-korea-missile-test-database/">here</a> for the original data source.
