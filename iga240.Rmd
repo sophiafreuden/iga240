@@ -170,4 +170,7 @@ plot2
 plot3
 ```
 
-Click <a href = "https://www.nti.org/analysis/articles/cns-north-korea-missile-test-database/">here</a> for the original data source.
+Click <a href = "https://www.nti.org/analysis/articles/cns-north-korea-missile-test-database/">here</a> for the original data source.  
+
+```{r}
+```
