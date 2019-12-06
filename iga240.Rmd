@@ -12,6 +12,7 @@ library(janitor)
 library(lubridate)
 library(gt)
 library(scales)
+library(imager)
 library(tidyverse)
 ```
 
@@ -170,7 +171,18 @@ plot2
 plot3
 ```
 
-Click <a href = "https://www.nti.org/analysis/articles/cns-north-korea-missile-test-database/">here</a> for the original data source.  
+Click <a href = "https://www.nti.org/analysis/articles/cns-north-korea-missile-test-database/">here</a> for the original data source.
 
-```{r}
+```{r map south china sea, fig.height=10, fig.width=10}
+x <- load.image("scs.png")
+
+plot(x, axes = FALSE)
 ```
+
+```{r map black sea, fig.height=10, fig.width=10}
+y <- load.image("kerch.png")
+
+plot(y, axes = FALSE)
+```
+
+
