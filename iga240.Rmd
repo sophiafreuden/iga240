@@ -52,7 +52,8 @@ plot1 <- ggplot(nkmissiles4, aes(x = date, y = distance_travelled, color = missi
   labs(
     title = "Distance Missiles Travelled Over Time",
     subtitle = "Each point represents a single missile launch",
-    color = "Missile Type"
+    color = "Missile Type",
+    caption = "For missiles with known distances travelled greater than 0"
   ) +
   xlab("Time") +
   ylab("Distance Travelled")
@@ -185,4 +186,15 @@ y <- load.image("kerch.png")
 plot(y, axes = FALSE, main = "Source: Bellingcat")
 ```
 
+```{r map black sea 2, fig.height=10, fig.width=10}
+z <- load.image("kerch2.jpg")
+
+plot(z, axes = FALSE, main = "Source: Kyiv Post")
+```
+
+```{r map black sea 3, fig.height=10, fig.width=10}
+a <- load.image("blacksea.png")
+
+plot(a, axes = FALSE, main = "Source: Public Domain")
+```
 
